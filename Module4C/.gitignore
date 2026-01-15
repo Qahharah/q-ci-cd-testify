@@ -31,3 +31,8 @@ bin/
 # IntelliJ project files
 *.iml
 .idea/
+.DS_Store
+*.iml
+.idea/
+out/
+.q-ci-cd-testify/
