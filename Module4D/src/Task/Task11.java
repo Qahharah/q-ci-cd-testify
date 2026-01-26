@@ -21,19 +21,14 @@ public class Task11 {
             driver.manage().window().maximize();
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
-            // 1. Open Testify website directly
             driver.get("https://testifyltd.com");
 
-            // Small pause for realism
             Thread.sleep(2000);
 
-            // 2. Navigate directly to LinkedIn company page (NO GOOGLE)
             driver.get("https://ng.linkedin.com/company/testifyacademy");
 
-            // 3. Wait for LinkedIn page body to load
             wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("body")));
 
-            // 4. Close sign-in modal if it appears
             try {
                 WebElement closeButton = wait.until(
                         ExpectedConditions.elementToBeClickable(
@@ -42,16 +37,14 @@ public class Task11 {
                 );
                 closeButton.click();
             } catch (Exception ignored) {
-                // Modal did not appear – perfectly fine
+
             }
 
-            // 5. Scroll page
             JavascriptExecutor js = (JavascriptExecutor) driver;
             js.executeScript("window.scrollBy(0,600);");
 
             Thread.sleep(2000);
 
-            // 6. Validate page title
             String title = driver.getTitle();
             System.out.println("Page title: " + title);
 
@@ -59,7 +52,7 @@ public class Task11 {
                 throw new RuntimeException("LinkedIn page did not load correctly");
             }
 
-            System.out.println("Task11 completed successfully.");
+            System.out.println("Task11 completed successfully");
 
         } catch (Exception e) {
             e.printStackTrace();
