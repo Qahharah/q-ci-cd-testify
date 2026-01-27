@@ -45,34 +45,28 @@ public class Task15 {
 
         driver.get("https://www.mcdonalds.com/us/en-us.html");
 
-        // 1️⃣ Handle cookie / terms banner defensively
         try {
             By acceptButton =
                     By.xpath("//button[.//text()[contains(.,'Accept')]]");
             wait.until(ExpectedConditions.elementToBeClickable(acceptButton)).click();
         } catch (TimeoutException ignored) {
-            // Banner not shown — safe to continue
         }
 
-        // 2️⃣ Wait for full page load
         wait.until(driver ->
                 ((JavascriptExecutor) driver)
                         .executeScript("return document.readyState")
                         .equals("complete")
         );
 
-        // 3️⃣ Locate Order Now button safely
         By orderNowButton = By.xpath("//a[contains(@href,'order')]");
 
         WebElement orderNow =
                 wait.until(ExpectedConditions.elementToBeClickable(orderNowButton));
 
-        // 4️⃣ Read background color
         String backgroundColor = orderNow.getCssValue("background-color");
 
         System.out.println("Order Now button color: " + backgroundColor);
 
-        // 5️⃣ Assertion
         Assert.assertNotNull(backgroundColor, "Order Now button color is null");
         Assert.assertFalse(backgroundColor.isEmpty(), "Order Now button color is empty");
     }
@@ -80,7 +74,7 @@ public class Task15 {
     @AfterClass
     public void tearDown() {
         if (driver != null) {
-            driver.quit();
+            //driver.quit();
         }
     }
 }
